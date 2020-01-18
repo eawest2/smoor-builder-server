@@ -1,0 +1,61 @@
+package com.smoorbuilderserver.model;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
+import javax.persistence.NamedQuery;
+import javax.persistence.Table;
+
+@Entity
+@Table(name = "combat_action_description")
+@NamedQuery(name = "CombatActionDescription.findById", query = "from CombatActionDescription c where c.id = ?1")
+public class CombatActionDescription {
+	
+	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private long id;
+	
+	@Column(name = "action_name")
+	private String actionName;
+	
+	@Column(name = "action_description")
+	@Lob
+	private String actionDescription;
+
+	public CombatActionDescription() {};
+	
+	public CombatActionDescription(
+			String actionName, String actionDescription) 
+	{
+		this.actionName = actionName;
+		this.actionDescription = actionDescription;
+	}
+
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
+
+	public String getActionName() {
+		return actionName;
+	}
+
+	public void setActionName(String actionName) {
+		this.actionName = actionName;
+	}
+
+	public String getActionDescription() {
+		return actionDescription;
+	}
+
+	public void setActionDescription(String actionDescription) {
+		this.actionDescription = actionDescription;
+	}
+
+}
