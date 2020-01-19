@@ -1,22 +1,16 @@
 package com.smoorbuilderserver.model;
 
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import com.smoorbuilderserver.model.User;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "character", schema = "public")
@@ -27,14 +21,9 @@ public class Character {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-//	@Column( name = "user_id")
-    @ManyToOne
-    @JoinTable(
-            name="user",
-            joinColumns = @JoinColumn( name="id"),
-            inverseJoinColumns = @JoinColumn( name="user_id")
-    )
-	private Integer userId;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
+	private User user;
 	
 	@Column(name = "build_total")
 	private Integer buildTotal;
@@ -63,11 +52,11 @@ public class Character {
 	public Character() {};
 	
 	public Character(
-			Integer userId, Integer buildTotal, String characterName,
+			User user, Integer buildTotal, String characterName,
 			Integer race, Integer classType, String background, 
 			String description, String image) 
 	{
-		this.userId = userId;
+		this.user = user;
 		this.buildTotal = buildTotal;
 		this.characterName = characterName;
 		this.race = race;
@@ -85,12 +74,12 @@ public class Character {
 		this.id = id;
 	}
 
-	public Integer getUserId() {
-		return userId;
+	public User getUser() {
+		return user;
 	}
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
+	public void setUser(User user) {
+		this.user = user;
 	}
 
 	public Integer getBuildTotal() {

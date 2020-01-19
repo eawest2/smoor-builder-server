@@ -7,12 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
-import javax.persistence.OneToMany;
 import javax.persistence.Table;
-
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 @Table(name = "user", schema = "public")
@@ -21,7 +17,7 @@ public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-//	@OneToMany(mappedBy="character", cascade = CascadeType.ALL)
+
     private Integer id;
 	
 	@Column(unique = true, name = "username")
@@ -50,7 +46,6 @@ public class User {
 	
 	@Column(name = "account_role")
 	private Integer accountRole;
-
 	
 	public User() {};
 	
