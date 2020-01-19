@@ -36,6 +36,7 @@ public class UserController {
 		if (userSearch == null) {
 			userRepository.save(user);
 			
+			
 			return new ResponseEntity<>(user, HttpStatus.CREATED);
 	    } else {
 	    	ApiResponse apiResponse = new ApiResponse();
@@ -82,7 +83,7 @@ public class UserController {
 	
 	@GetMapping(path="/user/first/{firstName}")
 	public ResponseEntity<?> getByFirstName(@PathVariable("firstName") String firstName) {
-		List <User> userSearch = userRepository.findDistinctUserByFirstname(firstName);
+		List <User> userSearch = userRepository.findDistinctUserByFirstName(firstName);
 	    if (userSearch == null) {
 	    	ApiResponse apiResponse = new ApiResponse();
 	    	apiResponse.setResponseCode(200);

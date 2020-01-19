@@ -8,25 +8,33 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
 import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import com.smoorbuilderserver.model.User;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "character")
+@Table(name = "character", schema = "public")
 @NamedQuery(name = "Character.findById", query = "from Character c where c.id = ?1")
 public class Character {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-	
-	@OneToMany
-	@JoinColumn(name = "user")
-	private Integer user;
+
+//	@Column( name = "user_id")
+    @ManyToOne
+    @JoinTable(
+            name="user",
+            joinColumns = @JoinColumn( name="id"),
+            inverseJoinColumns = @JoinColumn( name="user_id")
+    )
+	private Integer userId;
 	
 	@Column(name = "build_total")
 	private Integer buildTotal;
@@ -34,12 +42,12 @@ public class Character {
 	@Column(name = "character_name")
 	private String characterName;
 	
-	@OneToMany
-	@JoinColumn(name = "race")
+//	@ManyToOne
+//	@JoinColumn(name = "race_description")
 	private Integer race;
 	
-	@OneToMany
-	@JoinColumn(name = "class")
+//	@ManyToOne
+//	@JoinColumn(name = "class_description")
 	private Integer classType;
 
 	@Column(name = "background")
@@ -55,11 +63,11 @@ public class Character {
 	public Character() {};
 	
 	public Character(
-			Integer user, Integer buildTotal, String characterName,
+			Integer userId, Integer buildTotal, String characterName,
 			Integer race, Integer classType, String background, 
 			String description, String image) 
 	{
-		this.user = user;
+		this.userId = userId;
 		this.buildTotal = buildTotal;
 		this.characterName = characterName;
 		this.race = race;
@@ -77,12 +85,12 @@ public class Character {
 		this.id = id;
 	}
 
-	public Integer getUser() {
-		return user;
+	public Integer getUserId() {
+		return userId;
 	}
 
-	public void setUser(Integer user) {
-		this.user = user;
+	public void setUserId(Integer userId) {
+		this.userId = userId;
 	}
 
 	public Integer getBuildTotal() {

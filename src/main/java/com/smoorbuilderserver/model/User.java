@@ -7,19 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
-@Table(name = "user")
+@Table(name = "user", schema = "public")
 @NamedQuery(name = "User.findByUsername", query = "from User u where u.username = ?1")
 public class User {
 	
 	@Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//	@OneToMany(mappedBy="character", cascade = CascadeType.ALL)
+    private Integer id;
 	
 	@Column(unique = true, name = "username")
 	private String username;
@@ -34,7 +37,6 @@ public class User {
 	private String email;
 	
 	@Column(name = "password")
-	@JsonIgnore
 	private String password;
 
 	@Column(name = "create_date")
@@ -72,7 +74,7 @@ public class User {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
