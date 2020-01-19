@@ -31,13 +31,13 @@ public class Character {
 	@Column(name = "character_name")
 	private String characterName;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "race_description")
-	private Integer race;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false)
+	private RaceDescription raceDescription;
 	
-//	@ManyToOne
-//	@JoinColumn(name = "class_description")
-	private Integer classType;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false)
+	private ClassDescription classDescription;
 
 	@Column(name = "background")
 	private String background;
@@ -53,14 +53,14 @@ public class Character {
 	
 	public Character(
 			User user, Integer buildTotal, String characterName,
-			Integer race, Integer classType, String background, 
+			RaceDescription raceDescription, ClassDescription classDescription, String background, 
 			String description, String image) 
 	{
 		this.user = user;
 		this.buildTotal = buildTotal;
 		this.characterName = characterName;
-		this.race = race;
-		this.classType = classType;
+		this.raceDescription = raceDescription;
+		this.classDescription = classDescription;
 		this.background = background;
 		this.description = description;
 		this.image = image;
@@ -98,20 +98,20 @@ public class Character {
 		this.characterName = characterName;
 	}
 
-	public Integer getRace() {
-		return race;
+	public RaceDescription getRaceDescription() {
+		return raceDescription;
 	}
 
-	public void setRace(Integer race) {
-		this.race = race;
+	public void setRaceDescription(RaceDescription raceDescription) {
+		this.raceDescription = raceDescription;
 	}
 
-	public Integer getClassType() {
-		return classType;
+	public ClassDescription getClassDescription() {
+		return classDescription;
 	}
 
-	public void setClassType(Integer classType) {
-		this.classType = classType;
+	public void setClassDescription(ClassDescription classDescription) {
+		this.classDescription = classDescription;
 	}
 
 	public String getBackground() {

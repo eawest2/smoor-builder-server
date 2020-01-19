@@ -6,18 +6,16 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "class_description")
-@NamedQuery(name = "ClassDescription.findById", query = "from ClassDescription c where c.id = ?1")
+@Table(name = "class_description", schema = "public")
 public class ClassDescription {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-	
+
 	@Column(name = "class_name")
 	private String className;
 	
@@ -33,7 +31,7 @@ public class ClassDescription {
 		this.className = className;
 		this.classDescription = classDescription;
 	}
-
+	
 	public long getId() {
 		return id;
 	}
