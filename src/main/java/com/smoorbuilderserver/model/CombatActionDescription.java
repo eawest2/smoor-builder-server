@@ -6,12 +6,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Lob;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
 @Table(name = "combat_action_description")
-@NamedQuery(name = "CombatActionDescription.findById", query = "from CombatActionDescription c where c.id = ?1")
 public class CombatActionDescription {
 	
 	@Id

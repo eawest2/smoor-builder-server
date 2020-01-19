@@ -20,7 +20,7 @@ public class User {
 
     private Integer id;
 	
-	@Column(unique = true, name = "username")
+	@Column(unique = true, name = "username", nullable = false)
 	private String username;
 	
 	@Column(name = "first_name")
@@ -29,10 +29,10 @@ public class User {
 	@Column(name = "last_name")
 	private String lastName;
 	
-	@Column(name = "email")
+	@Column(name = "email",  nullable = false)
 	private String email;
 	
-	@Column(name = "password")
+	@Column(name = "password", nullable = false)
 	private String password;
 
 	@Column(name = "create_date")

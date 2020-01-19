@@ -28,7 +28,7 @@ public class Character {
 	@Column(name = "build_total")
 	private Integer buildTotal;
 	
-	@Column(name = "character_name")
+	@Column(name = "character_name", nullable = false)
 	private String characterName;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
