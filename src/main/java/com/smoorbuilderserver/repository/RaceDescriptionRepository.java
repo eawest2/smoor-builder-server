@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
+import com.smoorbuilderserver.model.ClassDescription;
 import com.smoorbuilderserver.model.RaceDescription;
 
 @Repository
@@ -15,4 +16,6 @@ public interface RaceDescriptionRepository extends CrudRepository<RaceDescriptio
 	public RaceDescription findByid(Integer id);
 	
 	public List<RaceDescription> findDistinctRaceDescriptionByRaceName(String raceName);
+	
+	public List<RaceDescription> saveRaceDescription (List<RaceDescription> list);
 }
