@@ -16,6 +16,6 @@ public interface CombatActionDescriptionRepository extends CrudRepository<Combat
 	
 	public List<CombatActionDescription> findDistinctCombatActionDescriptionByActionName(String actionName);
 	
-	public List<CombatActionDescription> saveCombatActionDescription (List<CombatActionDescription> list);
+//	public void saveAllCombatActionDescription (List<CombatActionDescription> combatActionDescriptions);
 
 }
