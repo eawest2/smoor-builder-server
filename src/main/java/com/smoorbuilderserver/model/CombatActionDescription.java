@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "combat_action_description")
 public class CombatActionDescription {
@@ -16,9 +18,11 @@ public class CombatActionDescription {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	
+	@JsonProperty("action_name")
 	@Column(name = "action_name")
 	private String actionName;
 	
+	@JsonProperty("action_description")
 	@Column(name = "action_description")
 	@Lob
 	private String actionDescription;

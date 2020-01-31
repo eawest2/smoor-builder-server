@@ -12,6 +12,6 @@ public class Seeder {
 //	@EventListener (ContextRefreshedEvent.class)
 	public void	runSeeder(ContextRefreshedEvent event) {
 		System.out.println(">>>>>Seeder Start");
-		seedCombatActions.seedCombatActionDescriptions(jsonPath);	
+		seedCombatActions.seedCombatActionDescriptions();	
 	}
 };

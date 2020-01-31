@@ -14,34 +14,25 @@ public class SeedCombatActionDescriptions {
 	
 	ObjectMapper combatActionDescriptionMapper = new ObjectMapper();
 	
-	TypeReference<List<CombatActionDescription>> combatActionDescriptionTypeReference = 
-			new TypeReference<List<CombatActionDescription>>() {};
+	InputStream combatActionDescriptionInputStream = 
+			TypeReference.class.getResourceAsStream("/combat-action-description.json");
 			
 	public void saveCombatActionDescriptions(List<CombatActionDescription> combatActionDescriptions) {
-		System.out.println(">>>>>Before CADseeder saveAll");
+
 		combatActionDescriptionRepository.saveAll(combatActionDescriptions);
 	}
 	
-	public void seedCombatActionDescriptions(String path) {
-		System.out.println(">>>>>CAD Seeder start");
-		System.out.println(path + "combat-action-description.json");
-		
-		InputStream combatActionDescriptionInputStream = 
-				TypeReference.class.getResourceAsStream("combat-action-description.json");
-		
-		System.out.println(">>>>>> Input Stream Output" + combatActionDescriptionInputStream);
-		String listout = System.getProperty("user.dir");
-		
-		System.out.println(">>>>> Listing root directory: " + listout);
-		
-//		InputStream input = new FileInputStream("\\bin\\main\\json\\seed\\" + "combat-action-description.json");
+	public void seedCombatActionDescriptions() {
 		
 		try {
 			System.out.println(">>>>>CAD Seeder TryCatch Start");
-			List<CombatActionDescription> combatActionDescriptions = 
-					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, combatActionDescriptionTypeReference);
+			CombatActionDescription[] combatActionDescriptions = 
+					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
+//			for (CombatActionDescription combatActionDescription : combatActionDescriptions)
+//			{
+//				CombatActionDescriptionRepository.save(deployedCombatDescription);
+//			}
 			System.out.println(">>>>> List of combat actions" + combatActionDescriptions);
-			saveCombatActionDescriptions(combatActionDescriptions);
 			System.out.println(">>>>>Combat Actions Added");
 			
 		} catch(Exception e){
