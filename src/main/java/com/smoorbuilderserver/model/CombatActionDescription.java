@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
@@ -15,6 +16,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CombatActionDescription {
 	
 	@Id
+	@JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 	

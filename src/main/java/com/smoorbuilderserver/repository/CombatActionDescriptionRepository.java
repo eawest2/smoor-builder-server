@@ -15,5 +15,4 @@ public interface CombatActionDescriptionRepository extends CrudRepository<Combat
 	public CombatActionDescription findByid(Integer id);
 	
 	public List<CombatActionDescription> findDistinctCombatActionDescriptionByActionName(String actionName);
-
 }
