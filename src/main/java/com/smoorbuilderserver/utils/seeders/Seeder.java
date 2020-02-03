@@ -10,9 +10,16 @@ public class Seeder {
 	@Autowired
 	SeedCombatActionDescriptions seedCombatActions;
 	
+	@Autowired
+	SeedGeneralSkillDescriptions seedGeneralSkillDescriptions;
+	
 	public void	runSeeder(ApplicationReadyEvent event) {
 		System.out.println(">Seeder Start");
+		
 		System.out.println(">>>Combat Action Description Seeder Start");
 		seedCombatActions.seedCombatActionDescriptions();
+		
+		System.out.println(">>>General Skill Description Seeder Start");
+		seedGeneralSkillDescriptions.seedGeneralSkillDescriptions();
 	}
 };

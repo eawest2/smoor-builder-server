@@ -1,39 +1,40 @@
-//package com.smoorbuilderserver.utils.seeders;
-//
-//import java.io.InputStream;
-//import java.util.List;
-//
-//import com.fasterxml.jackson.core.type.TypeReference;
-//import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.smoorbuilderserver.model.GeneralSkillDescription;
-//import com.smoorbuilderserver.repository.GeneralSkillDescriptionRepository;
-//
-//public class SeedGeneralSkillDescriptions {
-//	
-//	private GeneralSkillDescriptionRepository generalSkillDescriptionRepository;
-//	
-//	ObjectMapper generalSkillDescriptionMapper = new ObjectMapper();
-//	
-//	TypeReference<List<GeneralSkillDescription>> generalSkillDescriptionTypeReference = 
-//			new TypeReference<List<GeneralSkillDescription>>() {};
-//			
-//	public void saveGeneralSkillDescriptions(List<GeneralSkillDescription> generalSkillDescriptions) {
-//		generalSkillDescriptionRepository.saveAllGeneralSkillDescriptions(generalSkillDescriptions);
-//	}
-//
-//	
-//	public void seedGeneralSkillDescriptions(String path) {
-//		InputStream generalSkillDescriptionInputStream = 
-//				TypeReference.class.getResourceAsStream(path + "general-skill-description.json");
-//		try {
-//			List<GeneralSkillDescription> generalSkillDescriptions = 
-//					generalSkillDescriptionMapper.readValue(generalSkillDescriptionInputStream, generalSkillDescriptionTypeReference);
-//			saveGeneralSkillDescriptions(generalSkillDescriptions);
-//			System.out.println(">>>>>General Skills Added");
-//			
-//		} catch(Exception e){
-//			System.out.println(">>>>>Error Adding General Skills: " + e);
-//		}
-//	}
-//}
-//
+package com.smoorbuilderserver.utils.seeders;
+
+import java.io.InputStream;
+import java.util.Arrays;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+
+import com.fasterxml.jackson.core.type.TypeReference;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.smoorbuilderserver.model.GeneralSkillDescription;
+import com.smoorbuilderserver.repository.GeneralSkillDescriptionRepository;
+
+@Component
+public class SeedGeneralSkillDescriptions {
+	
+	@Autowired
+	private GeneralSkillDescriptionRepository generalSkillDescriptionRepository;
+	
+	ObjectMapper generalSkillDescriptionMapper = new ObjectMapper();
+	
+	InputStream generalSkillDescriptionInputStream = 
+			TypeReference.class.getResourceAsStream("/general-skill-description.json");
+	
+	public void seedGeneralSkillDescriptions() {
+		
+		try {
+			GeneralSkillDescription[] generalSkillDescriptions = 
+					generalSkillDescriptionMapper.readValue(generalSkillDescriptionInputStream, GeneralSkillDescription[].class);
+			List<GeneralSkillDescription> seedGenseralSkillDescriptionList = Arrays.asList(generalSkillDescriptions);
+			generalSkillDescriptionRepository.saveAll(seedGenseralSkillDescriptionList);
+			System.out.println(">>>>>General Skills Added");
+			
+		} catch(Exception e){
+			System.out.println(">>>>>Error Adding General Skills Actions: " + e);
+		}
+	}
+}
+

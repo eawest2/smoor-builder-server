@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "general_skill_description", schema = "public")
@@ -15,18 +16,21 @@ public class GeneralSkillDescription {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-	@Column(name = "skill_name")
-	private String generalSkillName;
 	
-	@Column(name = "skill_cost")
+	@JsonProperty("skill_cost")
+	@Column(name = "skill_cost", nullable = false)
 	private Integer generalSkillCost;
 	
-	@Column(name = "skill_description")
-	@Lob
+	@JsonProperty("skill_description")
+	@Column(name = "skill_description", nullable = false, columnDefinition = "TEXT")
 	private String generalSkillDescription;
 	
-	@Column(name = "skill_restricted_status")
+	@JsonProperty("skill_name")
+	@Column(name = "skill_name", unique = true, nullable = false)
+	private String generalSkillName;
+	
+	@JsonProperty("skill_restricted_status")
+	@Column(name = "skill_restricted_status", nullable = false)
 	private Integer generalSkillRestrictedStatus;
 
 	public GeneralSkillDescription() {};

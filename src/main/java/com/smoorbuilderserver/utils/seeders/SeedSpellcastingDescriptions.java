@@ -1,37 +1,39 @@
 //package com.smoorbuilderserver.utils.seeders;
 //
 //import java.io.InputStream;
+//import java.util.Arrays;
 //import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
 //
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.smoorbuilderserver.model.SpellcastingDescription;
-//import com.smoorbuilderserver.repository.SpellcastingDescriptionRepository;
+//import com.smoorbuilderserver.model.CombatActionDescription;
+//import com.smoorbuilderserver.repository.CombatActionDescriptionRepository;
 //
-//public class SeedSpellcastingDescriptions {
+//@Component
+//public class SeedCombatActionDescriptions {
 //	
-//	private SpellcastingDescriptionRepository spellcastingDescriptionRepository;
+//	@Autowired
+//	private CombatActionDescriptionRepository combatActionDescriptionRepository;
 //	
-//	ObjectMapper spellcastingDescriptionMapper = new ObjectMapper();
+//	ObjectMapper combatActionDescriptionMapper = new ObjectMapper();
 //	
-//	TypeReference<List<SpellcastingDescription>> spellcastingDescriptionTypeReference = 
-//			new TypeReference<List<SpellcastingDescription>>() {};
-//			
-//	public void saveSpellcastingDescriptions(List<SpellcastingDescription> spellcastingDescriptions) {
-//		spellcastingDescriptionRepository.saveSpellcastingDescriptions(spellcastingDescriptions);
-//	}
-//
-//	public void seedClassDescriptions(String path) {
-//		InputStream spellcastingDescriptionRepository = 
-//				TypeReference.class.getResourceAsStream(path + "spellcasting-description.json");
+//	InputStream combatActionDescriptionInputStream = 
+//			TypeReference.class.getResourceAsStream("/combat-action-description.json");
+//	
+//	public void seedCombatActionDescriptions() {
+//		
 //		try {
-//			List<SpellcastingDescription> classDescriptions = 
-//					spellcastingDescriptionMapper.readValue(spellcastingDescriptionRepository, spellcastingDescriptionTypeReference);
-//			saveSpellcastingDescriptions(classDescriptions);
-//			System.out.println(">>>>>Class Descriptions Added");
+//			CombatActionDescription[] combatActionDescriptions = 
+//					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
+//			List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);
+//			combatActionDescriptionRepository.saveAll(seedCADList);
+//			System.out.println(">>>>>Combat Actions Added");
 //			
 //		} catch(Exception e){
-//			System.out.println(">>>>>Error Adding Class Descriptions: " + e);
+//			System.out.println(">>>>>Error Adding Combat Actions: " + e);
 //		}
 //	}
 //}

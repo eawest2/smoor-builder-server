@@ -1,37 +1,39 @@
 //package com.smoorbuilderserver.utils.seeders;
 //
 //import java.io.InputStream;
+//import java.util.Arrays;
 //import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
 //
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.smoorbuilderserver.model.RaceDescription;
-//import com.smoorbuilderserver.repository.RaceDescriptionRepository;
+//import com.smoorbuilderserver.model.CombatActionDescription;
+//import com.smoorbuilderserver.repository.CombatActionDescriptionRepository;
 //
-//public class SeedRaceDescriptions {
+//@Component
+//public class SeedCombatActionDescriptions {
 //	
-//	private RaceDescriptionRepository raceDescriptionRepository;
+//	@Autowired
+//	private CombatActionDescriptionRepository combatActionDescriptionRepository;
 //	
-//	ObjectMapper raceDescriptionMapper = new ObjectMapper();
+//	ObjectMapper combatActionDescriptionMapper = new ObjectMapper();
 //	
-//	TypeReference<List<RaceDescription>> raceDescriptionTypeReference = 
-//			new TypeReference<List<RaceDescription>>() {};	
-//			
-//	public void saveRaceDescriptions(List<RaceDescription> raceDescriptions) {
-//		raceDescriptionRepository.saveRaceDescription(raceDescriptions);
-//	}
-//
-//	public void seedRaceDescriptions(String path) {
-//		InputStream raceDescriptionInputStream = 
-//				TypeReference.class.getResourceAsStream(path + "race-description.json");
+//	InputStream combatActionDescriptionInputStream = 
+//			TypeReference.class.getResourceAsStream("/combat-action-description.json");
+//	
+//	public void seedCombatActionDescriptions() {
+//		
 //		try {
-//			List<RaceDescription> classDescriptions = 
-//					raceDescriptionMapper.readValue(raceDescriptionInputStream, raceDescriptionTypeReference);
-//			saveRaceDescriptions(classDescriptions);
-//			System.out.println(">>>>>Race Descriptions Added");
+//			CombatActionDescription[] combatActionDescriptions = 
+//					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
+//			List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);
+//			combatActionDescriptionRepository.saveAll(seedCADList);
+//			System.out.println(">>>>>Combat Actions Added");
 //			
 //		} catch(Exception e){
-//			System.out.println(">>>>>Error Adding Race Descriptions: " + e);
+//			System.out.println(">>>>>Error Adding Combat Actions: " + e);
 //		}
 //	}
 //}

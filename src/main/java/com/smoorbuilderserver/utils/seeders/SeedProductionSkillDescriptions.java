@@ -1,38 +1,39 @@
 //package com.smoorbuilderserver.utils.seeders;
 //
 //import java.io.InputStream;
+//import java.util.Arrays;
 //import java.util.List;
+//
+//import org.springframework.beans.factory.annotation.Autowired;
+//import org.springframework.stereotype.Component;
 //
 //import com.fasterxml.jackson.core.type.TypeReference;
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.smoorbuilderserver.model.ProductionSkillDescription;
-//import com.smoorbuilderserver.repository.ProductionSkillDescriptionRepository;
+//import com.smoorbuilderserver.model.CombatActionDescription;
+//import com.smoorbuilderserver.repository.CombatActionDescriptionRepository;
 //
-//public class SeedProductionSkillDescriptions {
+//@Component
+//public class SeedCombatActionDescriptions {
 //	
-//	private ProductionSkillDescriptionRepository productionSkillDescriptionRepository;
+//	@Autowired
+//	private CombatActionDescriptionRepository combatActionDescriptionRepository;
 //	
-//	ObjectMapper productionSkillDescriptionMapper = new ObjectMapper();
+//	ObjectMapper combatActionDescriptionMapper = new ObjectMapper();
 //	
-//	TypeReference<List<ProductionSkillDescription>> productionSkillDescriptionTypeReference = 
-//			new TypeReference<List<ProductionSkillDescription>>() {};
+//	InputStream combatActionDescriptionInputStream = 
+//			TypeReference.class.getResourceAsStream("/combat-action-description.json");
 //	
-//	public void saveProductionSkillDescription(List<ProductionSkillDescription> productionSkillDescriptions) {
-//		productionSkillDescriptionRepository.saveProductionSkillDescriptions(productionSkillDescriptions);
-//	}
-//
-//	
-//	public void seedCombatActionDescriptions(String path) {
-//		InputStream productionSkillDescriptionInputStream = 
-//				TypeReference.class.getResourceAsStream(path + "production-skill-description.json");
+//	public void seedCombatActionDescriptions() {
+//		
 //		try {
-//			List<ProductionSkillDescription> combatActionDescriptions = 
-//					productionSkillDescriptionMapper.readValue(productionSkillDescriptionInputStream, productionSkillDescriptionTypeReference);
-//			saveProductionSkillDescription(combatActionDescriptions);
-//			System.out.println(">>>>>Production Skills Added");
+//			CombatActionDescription[] combatActionDescriptions = 
+//					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
+//			List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);
+//			combatActionDescriptionRepository.saveAll(seedCADList);
+//			System.out.println(">>>>>Combat Actions Added");
 //			
 //		} catch(Exception e){
-//			System.out.println(">>>>>Error Adding Production Skills: " + e);
+//			System.out.println(">>>>>Error Adding Combat Actions: " + e);
 //		}
 //	}
 //}

@@ -26,7 +26,6 @@ public class SeedCombatActionDescriptions {
 	public void seedCombatActionDescriptions() {
 		
 		try {
-			System.out.println(">>>>>CAD Seeder TryCatch Start");
 			CombatActionDescription[] combatActionDescriptions = 
 					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
 			List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);

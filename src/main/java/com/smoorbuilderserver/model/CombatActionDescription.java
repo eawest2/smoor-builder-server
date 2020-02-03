@@ -24,10 +24,18 @@ public class CombatActionDescription {
 	private String actionName;
 	
 	@JsonProperty("action_description")
-	@Column(name = "action_description", unique = true, nullable = false, columnDefinition = "TEXT")
+	@Column(name = "action_description", nullable = false, columnDefinition = "TEXT")
 	private String actionDescription;
 
 	public CombatActionDescription() {};
+	
+	public long getId() {
+		return id;
+	}
+
+	public void setId(long id) {
+		this.id = id;
+	}
 	
 	public CombatActionDescription(
 			String actionName, String actionDescription) 
