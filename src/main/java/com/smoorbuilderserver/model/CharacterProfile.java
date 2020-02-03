@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -7,51 +9,57 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
-import javax.persistence.NamedQuery;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "character", schema = "public")
-@NamedQuery(name = "Character.findById", query = "from Character c where c.id = ?1")
-public class Character {
+public class CharacterProfile {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private BigInteger id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonProperty("user_id")
     @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
 	private User user;
 	
+    @JsonProperty("build_total")
 	@Column(name = "build_total")
 	private Integer buildTotal;
 	
+    @JsonProperty("character_name")
 	@Column(name = "character_name", nullable = false)
 	private String characterName;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonProperty("race_description_id")
 	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false)
 	private RaceDescription raceDescription;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
+	@JsonProperty("class_description_id")
 	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false)
 	private ClassDescription classDescription;
-
-	@Column(name = "background")
+	
+	@JsonProperty("background")
+	@Column(name = "background", columnDefinition = "TEXT")
 	private String background;
 	
-	@Column(name = "description")
-	@Lob
+	@JsonProperty("description")
+	@Column(name = "description", columnDefinition = "TEXT")
 	private String description;
 	
+	@JsonProperty("image")
 	@Column(name = "image")
 	private String image;
 
-	public Character() {};
+	public CharacterProfile() {};
 	
-	public Character(
+	public CharacterProfile(
 			User user, Integer buildTotal, String characterName,
 			RaceDescription raceDescription, ClassDescription classDescription, String background, 
 			String description, String image) 
@@ -66,11 +74,11 @@ public class Character {
 		this.image = image;
 	}
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 

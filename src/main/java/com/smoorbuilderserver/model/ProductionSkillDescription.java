@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -15,7 +17,7 @@ public class ProductionSkillDescription {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private BigInteger id;
 	
 	@JsonProperty("production_name")
 	@Column(name = "production_name", unique = true, nullable = false)
@@ -34,11 +36,11 @@ public class ProductionSkillDescription {
 		this.productionSkillDescription = productionSkilDescription;
 	}
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 

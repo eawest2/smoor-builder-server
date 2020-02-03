@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.model;
 
+import java.math.BigInteger;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -16,7 +18,7 @@ public class CharacterCombatActionInventory {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private BigInteger id;
 	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
@@ -39,11 +41,11 @@ public class CharacterCombatActionInventory {
 		this.characterCombatActionTotal = characterCombatActionTotal;
 	}
 
-	public long getId() {
+	public BigInteger getId() {
 		return id;
 	}
 
-	public void setId(long id) {
+	public void setId(BigInteger id) {
 		this.id = id;
 	}
 

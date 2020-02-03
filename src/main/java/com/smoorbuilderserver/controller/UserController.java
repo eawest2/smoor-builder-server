@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.controller;
 
+import java.math.BigInteger;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,8 @@ public class UserController {
 		User userSearch = userRepository.findByUsername(newUsername);
 	    
 		if (userSearch == null) {
+			Date createdDate = new Date();
+			user.setCreateDate(createdDate);
 			userRepository.save(user);
 			
 			
@@ -54,7 +58,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/user/{id}")
-	public ResponseEntity<?> read(@PathVariable("id") Long id) {
+	public ResponseEntity<?> read(@PathVariable("id") BigInteger id) {
 	    User userSearch = userRepository.findById(id).get();
 	    if (userSearch == null) {
 	    	ApiResponse apiResponse = new ApiResponse();
@@ -96,7 +100,7 @@ public class UserController {
 	}
 	
 	@PutMapping(path="/user/{id}")
-	public @ResponseBody ResponseEntity<?> updateUserById(@PathVariable long id, @RequestBody User user) {
+	public @ResponseBody ResponseEntity<?> updateUserById(@PathVariable BigInteger id, @RequestBody User user) {
 		User existingUser = userRepository.findById(id).get();
 				
 		if  (existingUser != null) {
@@ -124,7 +128,7 @@ public class UserController {
 	}
 	
 	@PutMapping(path="/user/{id}/password")
-	public @ResponseBody ResponseEntity<?> updateUserPassById(@PathVariable long id, @RequestBody PasswordChange passReq) {
+	public @ResponseBody ResponseEntity<?> updateUserPassById(@PathVariable BigInteger id, @RequestBody PasswordChange passReq) {
 		User existingUser = userRepository.findById(id).get();
 		String dbPassword = existingUser.getPassword();
 		String reqPassword = passReq.getOldPassword();
@@ -160,7 +164,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping(path="/user/{id}")
-	public @ResponseBody ResponseEntity<?> deleteUserbyId(@PathVariable long id) {
+	public @ResponseBody ResponseEntity<?> deleteUserbyId(@PathVariable BigInteger id) {
 		User userSearch = userRepository.findById(id).get();
 		
 		if (userSearch != null) {
