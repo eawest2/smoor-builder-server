@@ -17,9 +17,7 @@ public class SmoorBuilderServerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(SmoorBuilderServerApplication.class, args);
 	}
-	
-//	Seeder seeder = new Seeder();
-	
+		
 	@EventListener (ApplicationReadyEvent.class)
 	public void	runSeeder(ApplicationReadyEvent event) {
 		seeder.runSeeder(event);

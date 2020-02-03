@@ -17,8 +17,7 @@ public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-
-    private Integer id;
+    private Long id;
 	
 	@Column(unique = true, name = "username", nullable = false)
 	private String username;
@@ -63,14 +62,6 @@ public class User {
 		this.accountActive = accountActive;
 		this.gobTotal = gobTotal;
 		this.accountRole = accountRole;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
 	}
 
 	public String getUsername() {

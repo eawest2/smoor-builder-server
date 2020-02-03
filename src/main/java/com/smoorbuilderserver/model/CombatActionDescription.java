@@ -5,7 +5,6 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -21,12 +20,11 @@ public class CombatActionDescription {
     private long id;
 	
 	@JsonProperty("action_name")
-	@Column(name = "action_name")
+	@Column(name = "action_name", unique = true, nullable = false)
 	private String actionName;
 	
 	@JsonProperty("action_description")
-	@Column(name = "action_description")
-	@Lob
+	@Column(name = "action_description", unique = true, nullable = false, columnDefinition = "TEXT")
 	private String actionDescription;
 
 	public CombatActionDescription() {};
@@ -36,14 +34,6 @@ public class CombatActionDescription {
 	{
 		this.actionName = actionName;
 		this.actionDescription = actionDescription;
-	}
-
-	public long getId() {
-		return id;
-	}
-
-	public void setId(long id) {
-		this.id = id;
 	}
 
 	public String getActionName() {
