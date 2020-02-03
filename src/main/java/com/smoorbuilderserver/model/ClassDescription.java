@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "class_description", schema = "public")
@@ -15,12 +16,13 @@ public class ClassDescription {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-	@Column(name = "class_name")
+	
+	@JsonProperty("class_name")
+	@Column(name = "class_name", unique = true, nullable = false)
 	private String className;
 	
-	@Column(name = "class_description")
-	@Lob
+	@JsonProperty("class_description")
+	@Column(name = "class_description", nullable = false, columnDefinition = "TEXT")
 	private String classDescription;
 
 	public ClassDescription() {};

@@ -1,0 +1,10 @@
+[
+    {
+        "class_name": "Warrior",
+        "class_description": "The Warrior is the master of all things combat-related and is capable of buying combat skills that no other class may purchase.\nHe also is able to avoid the moral issues that come with being one of the Warrior sub-classes.\nA Warrior has no limit to the armor he may wear nor to the damage he may deal in combat, which is appealing to many.\nHis maximum of seventy-five(75) Body Points is the largest amount available to any class.\nThe downside of the Warrior, however, is that that magic is prohibitively difficult to learn, making it so few Warriors ever purchase magical skills or spells."
+    },
+    {
+        "class_name": "Templar",
+        "class_description": "The Templar is a warrior-mage and is perfect for those that wish to both fight and cast equally well.\nThough they are slower to progress in both combat ability and spells than their Warrior and Scholar counterparts, the balance of the two is liked by many but too slow to progress for others.\n At any rate, Templars make some of the most formidable opponents around, providing you with the unexpected in both their casting and combat ability.\nPhysically, the Templar is equal to the Rogue with fifty (50) maximum Body Points and is only restricted to wearing twenty-five (25) armor points."
+    }
+]

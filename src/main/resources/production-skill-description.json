@@ -1,0 +1,10 @@
+[
+    {
+        "production_name": "Create Poison",
+        "production_description": "The Create Poison skill allows the character to concoct solid, liquid, and gaseous poisons.\nOne (1) production point is received per level of Create Poison purchased. See the Poison section for the list of poisons and the costs to make each, as well as rules for using them.\nThe Create Poison skill may be purchased up to twenty (20) times."
+    },
+    {
+        "production_name": "Create Scroll",
+        "production_description": "The Create Scroll skill allows a character with Celestial spell-casting ability to manufacture scrolls that duplicate the effects of spells that he can actually cast.\nThe scroll-maker receives one (1) production point per level of Create Scroll purchased.\nThe production point cost for scrolls is at the rate of one (1) per level of the scroll being created.\nRefer to the Celestial Spell description pages in the Magic section for information on spells that can be made into scrolls.\nThe Create Scroll skill may be purchased up to twenty (20) times."
+    }
+]

@@ -1,0 +1,10 @@
+[
+    {
+        "spellcasting_name": "Necromancer",
+        "spellcasting_description": "The Necromancer can harm nearly anything that lives with his range of spells, but the trade off is that he can heal only the undead and himself (at the rate of 4 x spell level).\nThe spell repertoire available to Necromancers makes them quite possibly the most formidable opponents to be found.\nWith spells to kill quickly and spells for easy disposal of bodies, they are to be approached with caution.\nYears of studying creatures of Undeath grants them spells that allow them to create, control, destroy, and heal Undead with the greatest of ease."
+    },
+    {
+        "spellcasting_name": "Celestial Generalist",
+        "spellcasting_description": "Celestial Generalists are versatile offensive casters, with a wide variety of spells at their disposal.\nThough they lack the spells and Resists of the specialty schools, they still have more than enough firepower when employed correctly.\nThe utility spell selection that accompanies their offensive capability more than completes this School, making Celestial Generalists truly fearsome opponents."
+    }
+]

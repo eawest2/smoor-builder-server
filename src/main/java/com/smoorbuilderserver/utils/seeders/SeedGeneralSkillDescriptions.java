@@ -33,7 +33,7 @@ public class SeedGeneralSkillDescriptions {
 			System.out.println(">>>>>General Skills Added");
 			
 		} catch(Exception e){
-			System.out.println(">>>>>Error Adding General Skills Actions: " + e);
+			System.out.println(">>>>>Error Adding General Skills: " + e);
 		}
 	}
 }

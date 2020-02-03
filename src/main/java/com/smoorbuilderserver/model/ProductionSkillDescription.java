@@ -5,8 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Lob;
 import javax.persistence.Table;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "production_skill_description", schema = "public")
@@ -15,13 +16,14 @@ public class ProductionSkillDescription {
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-
-	@Column(name = "production_name")
+	
+	@JsonProperty("production_name")
+	@Column(name = "production_name", unique = true, nullable = false)
 	private String productionSkillName;
 	
-	@Column(name = "production_description")
-	@Lob
-	private String productionSkilDescription;
+	@JsonProperty("production_description")
+	@Column(name = "production_description" , nullable = false, columnDefinition = "TEXT")
+	private String productionSkillDescription;
 
 	public ProductionSkillDescription() {};
 	
@@ -29,7 +31,7 @@ public class ProductionSkillDescription {
 			String productionSkillName, String productionSkilDescription) 
 	{
 		this.productionSkillName = productionSkillName;
-		this.productionSkilDescription = productionSkilDescription;
+		this.productionSkillDescription = productionSkilDescription;
 	}
 
 	public long getId() {
@@ -49,11 +51,11 @@ public class ProductionSkillDescription {
 	}
 
 	public String getProductionSkilDescription() {
-		return productionSkilDescription;
+		return productionSkillDescription;
 	}
 
 	public void setProductionSkilDescription(String productionSkilDescription) {
-		this.productionSkilDescription = productionSkilDescription;
+		this.productionSkillDescription = productionSkilDescription;
 	}
 
 }

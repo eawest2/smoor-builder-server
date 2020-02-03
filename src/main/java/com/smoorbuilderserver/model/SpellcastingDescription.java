@@ -8,6 +8,8 @@ import javax.persistence.Id;
 import javax.persistence.Lob;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 @Entity
 @Table(name = "spellcasting_description", schema = "public")
 public class SpellcastingDescription {
@@ -16,10 +18,12 @@ public class SpellcastingDescription {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-	@Column(name = "spellcasting_name")
+	@JsonProperty("spellcasting_name")
+	@Column(name = "spellcasting_name", unique = true, nullable = false)
 	private String spellcastingName;
 	
-	@Column(name = "spellcasting_description")
+	@JsonProperty("spellcasting_description")
+	@Column(name = "spellcasting_description", nullable = false, columnDefinition = "TEXT")
 	@Lob
 	private String spellcastingDescription;
 
