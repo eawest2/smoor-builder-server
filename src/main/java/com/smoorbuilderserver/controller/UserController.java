@@ -1,6 +1,5 @@
 package com.smoorbuilderserver.controller;
 
-import java.math.BigInteger;
 import java.util.Date;
 import java.util.List;
 
@@ -58,7 +57,7 @@ public class UserController {
 	}
 	
 	@GetMapping(path="/user/{id}")
-	public ResponseEntity<?> read(@PathVariable("id") BigInteger id) {
+	public ResponseEntity<?> read(@PathVariable("id") Long id) {
 	    User userSearch = userRepository.findById(id).get();
 	    if (userSearch == null) {
 	    	ApiResponse apiResponse = new ApiResponse();
@@ -100,7 +99,7 @@ public class UserController {
 	}
 	
 	@PutMapping(path="/user/{id}")
-	public @ResponseBody ResponseEntity<?> updateUserById(@PathVariable BigInteger id, @RequestBody User user) {
+	public @ResponseBody ResponseEntity<?> updateUserById(@PathVariable Long id, @RequestBody User user) {
 		User existingUser = userRepository.findById(id).get();
 				
 		if  (existingUser != null) {
@@ -128,7 +127,7 @@ public class UserController {
 	}
 	
 	@PutMapping(path="/user/{id}/password")
-	public @ResponseBody ResponseEntity<?> updateUserPassById(@PathVariable BigInteger id, @RequestBody PasswordChange passReq) {
+	public @ResponseBody ResponseEntity<?> updateUserPassById(@PathVariable Long id, @RequestBody PasswordChange passReq) {
 		User existingUser = userRepository.findById(id).get();
 		String dbPassword = existingUser.getPassword();
 		String reqPassword = passReq.getOldPassword();
@@ -164,7 +163,7 @@ public class UserController {
 	}
 	
 	@DeleteMapping(path="/user/{id}")
-	public @ResponseBody ResponseEntity<?> deleteUserbyId(@PathVariable BigInteger id) {
+	public @ResponseBody ResponseEntity<?> deleteUserbyId(@PathVariable Long id) {
 		User userSearch = userRepository.findById(id).get();
 		
 		if (userSearch != null) {
