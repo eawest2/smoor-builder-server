@@ -10,6 +10,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.smoorbuilderserver.model.CharacterProfile;
+import com.smoorbuilderserver.model.ClassDescription;
+import com.smoorbuilderserver.model.RaceDescription;
+import com.smoorbuilderserver.model.User;
 import com.smoorbuilderserver.repository.CharacterProfileRepository;
 import com.smoorbuilderserver.utils.ApiResponse;
 
@@ -30,6 +33,21 @@ public class CharacterProfileController {
 		CharacterProfile actionSearch = characterProfileRepository.findByCharacterName(newCharacterName);
 	    
 		if (actionSearch == null) {
+			System.out.println(">>>>>Character Controller - Begin Interpretation");
+//			User newCharacterUser = characterProfile.getUser();
+//			RaceDescription newCharacterRace = characterProfile.getRaceDescription();
+//			ClassDescription newCharacterClass = characterProfile.getClassDescription();
+			
+//			CharacterProfile saveNewCharacter;
+//			
+//			saveNewCharacter.setCharacterName(characterProfile.getCharacterName());
+//			saveNewCharacter.setBackground(characterProfile.getBackground());
+//			saveNewCharacter.setBuildTotal(characterProfile.getBuildTotal());
+//			saveNewCharacter.setDescription(characterProfile.getDescription());
+//			saveNewCharacter.setImage(characterProfile.getImage());
+			
+
+			
 			System.out.println(">>>>>Character Controller - Start Save");
 			characterProfileRepository.save(characterProfile);
 			

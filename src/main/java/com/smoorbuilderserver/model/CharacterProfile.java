@@ -1,5 +1,6 @@
 package com.smoorbuilderserver.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -20,7 +21,7 @@ public class CharacterProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonProperty("user_id")
     @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
 	private User user;
@@ -33,12 +34,12 @@ public class CharacterProfile {
 	@Column(name = "character_name", nullable = false)
 	private String characterName;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonProperty("race_description_id")
 	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false)
 	private RaceDescription raceDescription;
 	
-	@ManyToOne(fetch = FetchType.LAZY)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonProperty("class_description_id")
 	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false)
 	private ClassDescription classDescription;

@@ -1,5 +1,6 @@
 package com.smoorbuilderserver.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,11 +19,11 @@ public class CharacterProductionSkillinventory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
 	private User user;
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JoinColumn(name="production_skill_description_id", referencedColumnName="id", nullable = false)
 	private ProductionSkillDescription productionSkillDescription;
 	
