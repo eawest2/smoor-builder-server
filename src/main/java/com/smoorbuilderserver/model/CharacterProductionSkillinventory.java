@@ -1,7 +1,5 @@
 package com.smoorbuilderserver.model;
 
-import java.math.BigInteger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -18,7 +16,7 @@ public class CharacterProductionSkillinventory {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigInteger id;
+    private Long id;
 	
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
@@ -29,23 +27,23 @@ public class CharacterProductionSkillinventory {
 	private ProductionSkillDescription productionSkillDescription;
 	
 	@Column(name = "production_skill_total")
-	private Integer characterProductionSkillTotal;
+	private Long characterProductionSkillTotal;
 
 	public CharacterProductionSkillinventory() {};
 	
 	public CharacterProductionSkillinventory(
-			User user, ProductionSkillDescription productionSkillDescription, Integer characterProductionSkillTotal) 
+			User user, ProductionSkillDescription productionSkillDescription, Long characterProductionSkillTotal) 
 	{
 		this.user = user;
 		this.productionSkillDescription = productionSkillDescription;
 		this.characterProductionSkillTotal = characterProductionSkillTotal;
 	}
 
-	public BigInteger getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
@@ -65,11 +63,11 @@ public class CharacterProductionSkillinventory {
 		this.productionSkillDescription = productionSkillDescription;
 	}
 
-	public Integer getCharacterProductionSkillTotal() {
+	public Long getCharacterProductionSkillTotal() {
 		return characterProductionSkillTotal;
 	}
 
-	public void setCharacterProductionSkillTotal(Integer characterProductionSkillTotal) {
+	public void setCharacterProductionSkillTotal(Long characterProductionSkillTotal) {
 		this.characterProductionSkillTotal = characterProductionSkillTotal;
 	}
 }

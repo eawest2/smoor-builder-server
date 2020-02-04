@@ -1,7 +1,5 @@
 package com.smoorbuilderserver.model;
 
-import java.math.BigInteger;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -19,7 +17,7 @@ public class CombatActionDescription {
 	@Id
 	@JsonIgnore
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private BigInteger id;
+    private Long id;
 	
 	@JsonProperty("action_name")
 	@Column(name = "action_name", unique = true, nullable = false)
@@ -31,11 +29,11 @@ public class CombatActionDescription {
 
 	public CombatActionDescription() {};
 	
-	public BigInteger getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(BigInteger id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 	

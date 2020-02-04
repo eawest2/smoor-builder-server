@@ -1,6 +1,5 @@
 package com.smoorbuilderserver.repository;
 
-import java.math.BigInteger;
 import java.util.List;
 
 import org.springframework.data.repository.CrudRepository;
@@ -9,11 +8,11 @@ import org.springframework.stereotype.Repository;
 import com.smoorbuilderserver.model.CharacterProfile;
 
 @Repository
-public interface CharacterProfileRepository extends CrudRepository<CharacterProfile, BigInteger> {
+public interface CharacterProfileRepository extends CrudRepository<CharacterProfile, Long> {
 	
-	public CharacterProfile findByUserId (BigInteger userId);
+	public CharacterProfile findByUserId (Long userId);
 	
-	public CharacterProfile findByid(BigInteger id);
+	public CharacterProfile findByid(Long id);
 	
 	public CharacterProfile findByCharacterName(String characterName);
 	

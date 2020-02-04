@@ -1,6 +1,5 @@
 package com.smoorbuilderserver.model;
 
-import java.math.BigInteger;
 import java.util.Date;
 
 import javax.persistence.Column;
@@ -16,7 +15,7 @@ public class User {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private BigInteger id;
+    private Long id;
 	
 	@Column(unique = true, name = "username", nullable = false)
 	private String username;
