@@ -25,16 +25,25 @@ public class SeedCombatActionDescriptions {
 	
 	public void seedCombatActionDescriptions() {
 		
-		try {
-			CombatActionDescription[] combatActionDescriptions = 
-					combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
-			List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);
-			combatActionDescriptionRepository.saveAll(seedCADList);
-			System.out.println(">>>>>Combat Actions Added");
-			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding Combat Actions: " + e);
+		CombatActionDescription exists = combatActionDescriptionRepository.findByActionName("Critical Slay");
+		
+		if(exists != null) {
+			System.out.println(">>>>>Combat Actions exist, seeding not needed.");
 		}
+		else {
+			try {
+				CombatActionDescription[] combatActionDescriptions = 
+						combatActionDescriptionMapper.readValue(combatActionDescriptionInputStream, CombatActionDescription[].class);
+				List<CombatActionDescription> seedCADList = Arrays.asList(combatActionDescriptions);
+				combatActionDescriptionRepository.saveAll(seedCADList);
+				System.out.println(">>>>>Combat Actions Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding Combat Actions: " + e);
+			}
+		}
+		
+		
 	}
 }
 

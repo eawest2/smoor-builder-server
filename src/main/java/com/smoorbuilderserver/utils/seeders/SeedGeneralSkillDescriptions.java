@@ -25,15 +25,22 @@ public class SeedGeneralSkillDescriptions {
 	
 	public void seedGeneralSkillDescriptions() {
 		
-		try {
-			GeneralSkillDescription[] generalSkillDescriptions = 
-					generalSkillDescriptionMapper.readValue(generalSkillDescriptionInputStream, GeneralSkillDescription[].class);
-			List<GeneralSkillDescription> seedGenseralSkillDescriptionList = Arrays.asList(generalSkillDescriptions);
-			generalSkillDescriptionRepository.saveAll(seedGenseralSkillDescriptionList);
-			System.out.println(">>>>>General Skills Added");
-			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding General Skills: " + e);
+		GeneralSkillDescription exists = generalSkillDescriptionRepository.findByGeneralSkillName("Seamanship");
+		
+		if(exists != null) {
+			System.out.println(">>>>>General Skills exist, seeding not needed.");
+		}
+		else{
+			try {
+				GeneralSkillDescription[] generalSkillDescriptions = 
+						generalSkillDescriptionMapper.readValue(generalSkillDescriptionInputStream, GeneralSkillDescription[].class);
+				List<GeneralSkillDescription> seedGenseralSkillDescriptionList = Arrays.asList(generalSkillDescriptions);
+				generalSkillDescriptionRepository.saveAll(seedGenseralSkillDescriptionList);
+				System.out.println(">>>>>General Skills Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding General Skills: " + e);
+			}
 		}
 	}
 }

@@ -25,16 +25,24 @@ public class SeedSpellcastingDescriptions {
 	
 	public void seedSpellcastingDescriptions() {
 		
-		try {
-			SpellcastingDescription[] spellcastingDescriptions = 
-					spellcastingDescriptionMapper.readValue(spellcastingDescriptionInputStream, SpellcastingDescription[].class);
-			List<SpellcastingDescription> seedSpellcastingList = Arrays.asList(spellcastingDescriptions);
-			spellcastingDescriptionRepository.saveAll(seedSpellcastingList);
-			System.out.println(">>>>>Spellcasting Description Added");
-			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding Spellcasting Description: " + e);
+		SpellcastingDescription exists = spellcastingDescriptionRepository.findBySpellcastingName("Celestial Generalist");
+		
+		if(exists != null) {
+			System.out.println(">>>>>Spellcasting Descriptions exist, seeding not needed.");
 		}
+		else{
+			try {
+				SpellcastingDescription[] spellcastingDescriptions = 
+						spellcastingDescriptionMapper.readValue(spellcastingDescriptionInputStream, SpellcastingDescription[].class);
+				List<SpellcastingDescription> seedSpellcastingList = Arrays.asList(spellcastingDescriptions);
+				spellcastingDescriptionRepository.saveAll(seedSpellcastingList);
+				System.out.println(">>>>>Spellcasting Description Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding Spellcasting Description: " + e);
+			}
+		}
+		
 	}
 }
 

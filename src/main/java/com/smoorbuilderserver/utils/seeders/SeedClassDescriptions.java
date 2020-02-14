@@ -25,15 +25,23 @@ public class SeedClassDescriptions {
 	
 	public void seedClassDescriptions() {
 		
-		try {
-			ClassDescription[] classDescriptions = 
-					classDescriptionMapper.readValue(classDescriptionInputStream, ClassDescription[].class);
-			List<ClassDescription> seedClassList = Arrays.asList(classDescriptions);
-			classDescriptionRepository.saveAll(seedClassList);
-			System.out.println(">>>>>Classes Added");
+		ClassDescription exists = classDescriptionRepository.findByClassName("Templar");
+		
+		if(exists != null) {
+			System.out.println(">>>>>Classes exist, seeding not needed.");
+		}
+		else{
 			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding Classes: " + e);
+			try {
+				ClassDescription[] classDescriptions = 
+						classDescriptionMapper.readValue(classDescriptionInputStream, ClassDescription[].class);
+				List<ClassDescription> seedClassList = Arrays.asList(classDescriptions);
+				classDescriptionRepository.saveAll(seedClassList);
+				System.out.println(">>>>>Classes Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding Classes: " + e);
+			}
 		}
 	}
 }

@@ -23,7 +23,7 @@ public class CharacterProfile {
 
     @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @JsonProperty("user_id")
-    @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
+    @JoinColumn(name="user_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
 	private User user;
 	
     @JsonProperty("build_total")
@@ -34,14 +34,14 @@ public class CharacterProfile {
 	@Column(name = "character_name", nullable = false)
 	private String characterName;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JsonProperty("race_description_id")
-	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false)
+	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
 	private RaceDescription raceDescription;
 	
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JsonProperty("class_description_id")
-	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false)
+	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
 	private ClassDescription classDescription;
 	
 	@JsonProperty("background")

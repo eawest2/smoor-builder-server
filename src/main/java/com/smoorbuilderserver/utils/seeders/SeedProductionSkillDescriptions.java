@@ -24,16 +24,23 @@ public class SeedProductionSkillDescriptions {
 			TypeReference.class.getResourceAsStream("/production-skill-description.json");
 	
 	public void seedProductionSkillDescriptions() {
+		ProductionSkillDescription exists = productionSkillDescriptionRepository.findByProductionSkillName("Create Poison");
 		
-		try {
-			ProductionSkillDescription[] productionSkillDescriptions = 
-					productionSkillDescriptionMapper.readValue(productionSkillDescriptionInputStream, ProductionSkillDescription[].class);
-			List<ProductionSkillDescription> seedProductionSkillDescriptionList = Arrays.asList(productionSkillDescriptions);
-			productionSkillDescriptionRepository.saveAll(seedProductionSkillDescriptionList);
-			System.out.println(">>>>>Production Skills Added");
-			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding Production Skills: " + e);
+		if(exists != null) {
+			System.out.println(">>>>>Production Skills exist, seeding not needed.");
+		}
+		else{
+		
+			try {
+				ProductionSkillDescription[] productionSkillDescriptions = 
+						productionSkillDescriptionMapper.readValue(productionSkillDescriptionInputStream, ProductionSkillDescription[].class);
+				List<ProductionSkillDescription> seedProductionSkillDescriptionList = Arrays.asList(productionSkillDescriptions);
+				productionSkillDescriptionRepository.saveAll(seedProductionSkillDescriptionList);
+				System.out.println(">>>>>Production Skills Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding Production Skills: " + e);
+			}
 		}
 	}
 }

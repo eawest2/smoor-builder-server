@@ -25,15 +25,23 @@ public class SeedRaceDescriptions {
 	
 	public void seedRaceDescriptions() {
 		
-		try {
-			RaceDescription[] generalSkillDescriptions = 
-					raceDescriptionMapper.readValue(raceDescriptionInputStream, RaceDescription[].class);
-			List<RaceDescription> seedGenseralSkillDescriptionList = Arrays.asList(generalSkillDescriptions);
-			raceDescriptionRepository.saveAll(seedGenseralSkillDescriptionList);
-			System.out.println(">>>>>Races Added");
-			
-		} catch(Exception e){
-			System.out.println(">>>>>Error Adding Races: " + e);
+		RaceDescription exists = raceDescriptionRepository.findByRaceName("Surface Elf");
+		
+		if(exists != null) {
+			System.out.println(">>>>>Races exist, seeding not needed.");
+		}
+		else{
+		
+			try {
+				RaceDescription[] generalSkillDescriptions = 
+						raceDescriptionMapper.readValue(raceDescriptionInputStream, RaceDescription[].class);
+				List<RaceDescription> seedGenseralSkillDescriptionList = Arrays.asList(generalSkillDescriptions);
+				raceDescriptionRepository.saveAll(seedGenseralSkillDescriptionList);
+				System.out.println(">>>>>Races Added");
+				
+			} catch(Exception e){
+				System.out.println(">>>>>Error Adding Races: " + e);
+			}
 		}
 	}
 }
