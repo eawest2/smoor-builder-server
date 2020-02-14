@@ -34,6 +34,9 @@ public class CharacterProfileController {
 	    
 		if (actionSearch == null) {
 			System.out.println(">>>>>Character Controller - Begin Interpretation");
+			
+			//Perform some kind of join in here to make new character option. Utilize class identifiers rather than full class objects.
+			
 //			User newCharacterUser = characterProfile.getUser();
 //			RaceDescription newCharacterRace = characterProfile.getRaceDescription();
 //			ClassDescription newCharacterClass = characterProfile.getClassDescription();
