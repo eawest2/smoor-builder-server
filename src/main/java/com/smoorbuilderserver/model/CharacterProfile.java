@@ -1,15 +1,6 @@
 package com.smoorbuilderserver.model;
 
-import javax.persistence.CascadeType;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
@@ -21,9 +12,8 @@ public class CharacterProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JsonProperty("user_id")
-    @JoinColumn(name="user_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
+    @OneToOne(mappedBy = "username", fetch = FetchType.LAZY)
+    @JsonProperty("user")
 	private User user;
 	
     @JsonProperty("build_total")
@@ -34,14 +24,12 @@ public class CharacterProfile {
 	@Column(name = "character_name", nullable = false)
 	private String characterName;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JsonProperty("race_description_id")
-	@JoinColumn(name="race_description_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
+	@OneToOne(mappedBy = "raceName", fetch = FetchType.LAZY)
+	@JsonProperty("race")
 	private RaceDescription raceDescription;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-	@JsonProperty("class_description_id")
-	@JoinColumn(name="class_description_id", referencedColumnName="id", nullable = false,  updatable = false, insertable = false)
+	@OneToOne(mappedBy = "className", fetch = FetchType.LAZY)
+	@JsonProperty("class")
 	private ClassDescription classDescription;
 	
 	@JsonProperty("background")
