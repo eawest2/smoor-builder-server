@@ -3,6 +3,8 @@ package com.smoorbuilderserver.model;
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "character", schema = "public")
@@ -12,8 +14,13 @@ public class CharacterProfile {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
-    @OneToOne(mappedBy = "username", fetch = FetchType.LAZY)
-    @JsonProperty("user")
+	@JsonProperty("username")
+	@Column(name = "username")
+	private String username;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="username", referencedColumnName="username", nullable = false,  updatable = false, insertable = false)
+	@Fetch(FetchMode.JOIN)
 	private User user;
 	
     @JsonProperty("build_total")
@@ -23,13 +30,23 @@ public class CharacterProfile {
     @JsonProperty("character_name")
 	@Column(name = "character_name", nullable = false)
 	private String characterName;
-	
-	@OneToOne(mappedBy = "raceName", fetch = FetchType.LAZY)
-	@JsonProperty("race")
+
+	@JsonProperty("race_name")
+	@Column(name = "race_name")
+	private String race_name;
+
+    @OneToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name="race_name", referencedColumnName="race_name", nullable = false,  updatable = false, insertable = false)
+	@Fetch(FetchMode.JOIN)
 	private RaceDescription raceDescription;
-	
-	@OneToOne(mappedBy = "className", fetch = FetchType.LAZY)
-	@JsonProperty("class")
+
+	@JsonProperty("class_name")
+	@Column(name = "class_name")
+	private String class_name;
+
+	@OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+	@JoinColumn(name="class_name", referencedColumnName="class_name", nullable = false,  updatable = false, insertable = false)
+	@Fetch(FetchMode.JOIN)
 	private ClassDescription classDescription;
 	
 	@JsonProperty("background")
