@@ -8,8 +8,13 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "character_combat_action")
@@ -19,23 +24,34 @@ public class CharacterCombatActionInventory {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 	
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id", referencedColumnName="id", nullable = false)
-	private User user;
+	@JsonProperty("character_name")
+	@Column(name = "character_name")
+	private String character_name;
+	
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="character_name", referencedColumnName="character_name", nullable = false,  updatable = false, insertable = false)
+	@Fetch(FetchMode.JOIN)
+    private CharacterProfile character;
     
-    @ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name="combat_action_description_id", referencedColumnName="id", nullable = false)
+	@JsonProperty("action_name")
+	@Column(name = "action_name")
+	private String action_name;
+    
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name="action_name", referencedColumnName="action_name", nullable = false, updatable = false, insertable = false)
+	@Fetch(FetchMode.JOIN)
 	private CombatActionDescription combatActionDescription;
 	
+    @JsonProperty("combat_action_total")
 	@Column(name = "combat_action_total")
 	private Integer characterCombatActionTotal;
 
 	public CharacterCombatActionInventory() {};
 	
 	public CharacterCombatActionInventory(
-			User user, CombatActionDescription combatActionDescription, Integer characterCombatActionTotal) 
+			CharacterProfile character, CombatActionDescription combatActionDescription, Integer characterCombatActionTotal) 
 	{
-		this.user = user;
+		this.character = character;
 		this.combatActionDescription = combatActionDescription;
 		this.characterCombatActionTotal = characterCombatActionTotal;
 	}
@@ -48,12 +64,12 @@ public class CharacterCombatActionInventory {
 		this.id = id;
 	}
 
-	public User getUser() {
-		return user;
+	public CharacterProfile getCharacter() {
+		return character;
 	}
 
-	public void setUser(User user) {
-		this.user = user;
+	public void setCharacter(CharacterProfile character) {
+		this.character = character;
 	}
 
 	public CombatActionDescription getCombatActionDescription() {

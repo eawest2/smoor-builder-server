@@ -1,12 +1,13 @@
 package com.smoorbuilderserver.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import javax.persistence.*;
 
 @Entity
 @Table(name = "user", schema = "public")
-public class User {
+public class User implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

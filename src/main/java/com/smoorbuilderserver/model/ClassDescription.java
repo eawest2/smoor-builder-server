@@ -1,12 +1,14 @@
 package com.smoorbuilderserver.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "class_description", schema = "public")
-public class ClassDescription {
+public class ClassDescription implements Serializable {
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
