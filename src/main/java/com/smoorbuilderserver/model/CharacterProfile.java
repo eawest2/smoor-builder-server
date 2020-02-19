@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.model;
 
+import java.io.Serializable;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -8,7 +10,7 @@ import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "character", schema = "public")
-public class CharacterProfile {
+public class CharacterProfile implements Serializable{
 	
 	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)

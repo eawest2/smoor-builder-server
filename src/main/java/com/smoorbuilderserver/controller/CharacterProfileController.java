@@ -60,57 +60,47 @@ public class CharacterProfileController {
 	
 	@PostMapping(path="/character/action")
 	public @ResponseBody ResponseEntity<?> addNewCharacterAction (@RequestBody CharacterCombatActionInventory characterAction) {
-		
-		System.out.println(">>>>>>> Action break 1");
-		
+		ApiResponse apiResponse = new ApiResponse();
 		String newActionName = characterAction.getAction_name();
 		String characterName = characterAction.getCharacter_name();
-		Integer actionTotal = characterAction.getCharacterCombatActionTotal();
-		
-		System.out.println(">>>>>>> Action break 2 "+ actionTotal +" " + newActionName + " " + characterName);
+		Integer newActionTotal = characterAction.getCharacterCombatActionTotal();
 		
 		List <CharacterCombatActionInventory> nameSearch = characterCombatActionInventoryRepository.findDistinctCharacterCombatActionInventoryByCharacterCharacterName(characterName);
 		
-		System.out.println(">>>>>>> Action break 3");
-		
-		ApiResponse apiResponse = new ApiResponse();
-		
-		if (nameSearch.isEmpty() == false) {
-			System.out.println(">>>>>>> Action break 4");
-			
+		if (nameSearch.isEmpty() == false) {			
 			for(CharacterCombatActionInventory item : nameSearch)if (item.getCombatActionDescription().getActionName().equals(newActionName)) {
 				
-				apiResponse.setResponseCode(204);
-		    	apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
-		    	apiResponse.setResponseText("This Character already possess this action, please try another.");
-				return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
-			
+				if (item.getCharacterCombatActionTotal().equals(newActionTotal)) {
+					apiResponse.setResponseCode(204);
+			    	apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
+			    	apiResponse.setResponseText("This Character already possess this action, please try another.");
+					return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
+				}
+				else {
+					System.out.println(">>>>>Character/Action Controller - Updating Character Action Count");
+					
+					item.setCharacterCombatActionTotal(newActionTotal);
+					characterCombatActionInventoryRepository.save(item);
+					
+					apiResponse.setResponseCode(200);
+					apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
+			    	apiResponse.setResponseText("Changed " + newActionName + " count to " + newActionTotal + ".");
+					
+					return new ResponseEntity<>(apiResponse, HttpStatus.OK);
+				}
 			}
-//			else {
-//				System.out.println(">>>>>>> Action break 5");
-//				
-//				characterCombatActionInventoryRepository.save(characterAction);
-//				
-//				apiResponse.setResponseCode(409);
-//				apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
-//		    	apiResponse.setResponseText("Added new action " + newActionName + " to " + characterName + ".");
-//				
-//				return new ResponseEntity<>(apiResponse, HttpStatus.CONFLICT);
-//				
-//			}
 		}
 		else {
-			System.out.println(">>>>>>> Action break 5");
+			System.out.println(">>>>>Character/Action Controller - Adding new Character Action");
 			
 			characterCombatActionInventoryRepository.save(characterAction);
 			
-			apiResponse.setResponseCode(409);
+			apiResponse.setResponseCode(201);
 			apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
 	    	apiResponse.setResponseText("Added new action " + newActionName + " to " + characterName + ".");
 			
-			return new ResponseEntity<>(apiResponse, HttpStatus.CONFLICT);
+			return new ResponseEntity<>(apiResponse, HttpStatus.CREATED);
 		}
-		System.out.println(">>>>>>> Action break 6");
 		apiResponse.setResponseCode(400);
     	apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
     	apiResponse.setResponseText("The Server could not process your request");

@@ -1,5 +1,7 @@
 package com.smoorbuilderserver.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -12,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 @Entity
 @Table(name = "combat_action_description")
-public class CombatActionDescription {
+public class CombatActionDescription  implements Serializable{
 	
 	@Id
 	@JsonIgnore
