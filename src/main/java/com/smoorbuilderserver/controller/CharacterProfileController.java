@@ -63,10 +63,11 @@ public class CharacterProfileController {
 		
 		System.out.println(">>>>>>> Action break 1");
 		
-		String newActionName = characterAction.getCombatActionDescription().getActionName();
-		String characterName = characterAction.getCharacter().getCharacterName();
+		String newActionName = characterAction.getAction_name();
+		String characterName = characterAction.getCharacter_name();
+		Integer actionTotal = characterAction.getCharacterCombatActionTotal();
 		
-		System.out.println(">>>>>>> Action break 2");
+		System.out.println(">>>>>>> Action break 2 "+ actionTotal +" " + newActionName + " " + characterName);
 		
 		List <CharacterCombatActionInventory> nameSearch = characterCombatActionInventoryRepository.findDistinctCharacterCombatActionInventoryByCharacterCharacterName(characterName);
 		
@@ -85,27 +86,31 @@ public class CharacterProfileController {
 				return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
 			
 			}
-			else {
-				System.out.println(">>>>>>> Action break 5");
-				
-				characterCombatActionInventoryRepository.save(characterAction);
-				
-				apiResponse.setResponseCode(409);
-				apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
-		    	apiResponse.setResponseText("Added new action " + newActionName + " to " + characterName + ".");
-				
-				return new ResponseEntity<>(apiResponse, HttpStatus.CONFLICT);
-				
-			}
+//			else {
+//				System.out.println(">>>>>>> Action break 5");
+//				
+//				characterCombatActionInventoryRepository.save(characterAction);
+//				
+//				apiResponse.setResponseCode(409);
+//				apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
+//		    	apiResponse.setResponseText("Added new action " + newActionName + " to " + characterName + ".");
+//				
+//				return new ResponseEntity<>(apiResponse, HttpStatus.CONFLICT);
+//				
+//			}
 		}
 		else {
-			System.out.println(">>>>>>> Action break 6");
-			apiResponse.setResponseCode(204);
-	    	apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
-	    	apiResponse.setResponseText("This Character already possess this action, please try another.");
-			return new ResponseEntity<>(apiResponse, HttpStatus.NO_CONTENT);
+			System.out.println(">>>>>>> Action break 5");
+			
+			characterCombatActionInventoryRepository.save(characterAction);
+			
+			apiResponse.setResponseCode(409);
+			apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
+	    	apiResponse.setResponseText("Added new action " + newActionName + " to " + characterName + ".");
+			
+			return new ResponseEntity<>(apiResponse, HttpStatus.CONFLICT);
 		}
-		System.out.println(">>>>>>> Action break 7");
+		System.out.println(">>>>>>> Action break 6");
 		apiResponse.setResponseCode(400);
     	apiResponse.setResponseOrigin("/character/action, New Character Action Creation");
     	apiResponse.setResponseText("The Server could not process your request");

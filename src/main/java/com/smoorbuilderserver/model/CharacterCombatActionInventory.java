@@ -49,10 +49,12 @@ public class CharacterCombatActionInventory {
 	public CharacterCombatActionInventory() {};
 	
 	public CharacterCombatActionInventory(
-			CharacterProfile character, CombatActionDescription combatActionDescription, Integer characterCombatActionTotal) 
+			CharacterProfile character, String character_name, CombatActionDescription combatActionDescription, String action_name, Integer characterCombatActionTotal) 
 	{
 		this.character = character;
+		this.character_name = character_name;
 		this.combatActionDescription = combatActionDescription;
+		this.action_name = action_name;
 		this.characterCombatActionTotal = characterCombatActionTotal;
 	}
 
@@ -87,4 +89,22 @@ public class CharacterCombatActionInventory {
 	public void setCharacterCombatActionTotal(Integer characterCombatActionTotal) {
 		this.characterCombatActionTotal = characterCombatActionTotal;
 	}
+
+	public String getCharacter_name() {
+		return character_name;
+	}
+
+	public void setCharacter_name(String character_name) {
+		this.character_name = character_name;
+	}
+
+	public String getAction_name() {
+		return action_name;
+	}
+
+	public void setAction_name(String action_name) {
+		this.action_name = action_name;
+	}
+	
+	
 }
